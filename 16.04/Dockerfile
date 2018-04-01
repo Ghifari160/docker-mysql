@@ -11,7 +11,8 @@ RUN mkdir -p /var/run/mysqld && \
     chown mysql:mysql /var/run/mysqld
 
 # Custom MySQL configuration to disable bind-address
-ADD --chown=mysql:mysql mysqld.cnf /etc/mysql/mysql.conf.d/mysqld.cnf
+ADD mysqld.cnf /etc/mysql/mysql.conf.d/mysqld.cnf
+RUN chown mysql:mysql /etc/mysql/mysql.conf.d/mysqld.cnf
 
 # Change root password to $MYSQL_ROOT_PASSWORD and open access to all hosts
 RUN service mysql start && \
