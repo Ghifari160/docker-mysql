@@ -2,6 +2,9 @@ FROM ghifari160/ubuntu:16.04
 
 MAINTAINER Ghifari160 <ghifari160@ghifari160.com>
 
+# Disable interactive functions
+ENV DEBIAN_FRONTEND noninteractive
+
 # Install MySQL server
 RUN apt update && apt install -y mysql-server && apt clean && \
     rm -rf /var/lib/apt/lists/*
@@ -16,9 +19,9 @@ RUN chown mysql:mysql /etc/mysql/mysql.conf.d/mysqld.cnf
 
 # Change root password to $MYSQL_ROOT_PASSWORD and open access to all hosts
 RUN service mysql start && \
-    mysql -uroot -e 'UPDATE mysql.user SET authentication_string=Password("password") WHERE user="root";' && \
-    mysql -uroot -e 'INSERT INTO mysql.user (User,Host,authentication_string,ssl_cipher,x509_issuer,x509_subject) VALUES ("root","%",Password("$MYSQL_ROOT_PASSWORD"),"","","");' && \
-    mysql -uroot -e 'GRANT ALL PRIVILEGES ON *.* TO "root"@"%" IDENTIFIED BY "password";' && \
+    mysql -uroot -e 'CREATE USER "root"@"%";' && \
+    mysql -uroot -e 'GRANT ALL PRIVILEGES ON *.* TO "root"@"localhost" WITH GRANT OPTION;' && \
+    mysql -uroot -e 'GRANT ALL PRIVILEGES ON *.* TO "root"@"%" WITH GRANT OPTION;' && \
     mysql -uroot -e 'FLUSH PRIVILEGES;'
 
 # Symlink MySQL logs to stdio
