@@ -17,16 +17,15 @@ RUN mkdir -p /var/run/mysqld && \
 ADD mysqld.cnf /etc/mysql/mysql.conf.d/mysqld.cnf
 RUN chown mysql:mysql /etc/mysql/mysql.conf.d/mysqld.cnf
 
-# Change root password to $MYSQL_ROOT_PASSWORD and open access to all hosts
-RUN service mysql start && \
-    mysql -uroot -e 'CREATE USER "root"@"%";' && \
-    mysql -uroot -e 'GRANT ALL PRIVILEGES ON *.* TO "root"@"localhost" WITH GRANT OPTION;' && \
-    mysql -uroot -e 'GRANT ALL PRIVILEGES ON *.* TO "root"@"%" WITH GRANT OPTION;' && \
-    mysql -uroot -e 'FLUSH PRIVILEGES;'
+# Add init script
+RUN mkdir -p /etc/g16
+ADD init.sh /etc/g16/init.sh
+RUN chown root:root /etc/g16/init.sh && chmod 711 /etc/g16/init.sh
 
 # Symlink MySQL logs to stdio
-RUN ln -sf /proc/self/fd/1 /var/log/mysql/error.log
+#RUN ln -sf /proc/self/fd/1 /var/log/mysql/error.log
 
 VOLUME ["/var/lib/mysql"]
 
-CMD ["mysqld_safe"]
+#CMD ["mysqld_safe"]
+ENTRYPOINT ["/etc/g16/init.sh"]
