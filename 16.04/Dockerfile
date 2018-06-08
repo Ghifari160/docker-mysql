@@ -7,26 +7,24 @@ ENV DEBIAN_FRONTEND noninteractive
 
 # Install MySQL server
 RUN apt update && apt install -y mysql-server && apt clean && \
-    rm -rf /var/lib/apt/lists/*
-
-# Create MySQL socket / lockfile
-RUN mkdir -p /var/run/mysqld && \
-    chown mysql:mysql /var/run/mysqld
+    rm -rf /var/lib/apt/lists/* && \
+    rm -rf /etc/mysql/conf.d/mysqld_safe_syslog.cnf
 
 # Custom MySQL configuration to disable bind-address
 ADD mysqld.cnf /etc/mysql/mysql.conf.d/mysqld.cnf
 RUN chown mysql:mysql /etc/mysql/mysql.conf.d/mysqld.cnf
 
-# Change root password to $MYSQL_ROOT_PASSWORD and open access to all hosts
-RUN service mysql start && \
-    mysql -uroot -e 'CREATE USER "root"@"%";' && \
-    mysql -uroot -e 'GRANT ALL PRIVILEGES ON *.* TO "root"@"localhost" WITH GRANT OPTION;' && \
-    mysql -uroot -e 'GRANT ALL PRIVILEGES ON *.* TO "root"@"%" WITH GRANT OPTION;' && \
-    mysql -uroot -e 'FLUSH PRIVILEGES;'
+# Create MySQL socket / lock directory
+RUN mkdir -p /var/run/mysqld && \
+    chown mysql:mysql /var/run/mysqld
 
-# Symlink MySQL logs to stdio
-RUN ln -sf /proc/self/fd/1 /var/log/mysql/error.log
+# Add init script
+ADD init.sh /etc/g16/init.sh
+RUN chown root:root /etc/g16/init.sh && \
+    chmod 755 /etc/g16/init.sh
 
 VOLUME ["/var/lib/mysql"]
 
-CMD ["mysqld_safe"]
+EXPOSE 3306
+
+ENTRYPOINT ["/etc/g16/init.sh"]
