@@ -49,6 +49,8 @@ if [ "$G16_MACOS" = "yes" ]; then
 fi
 
 if [ ! -f "/var/lib/mysql/g16_mysql_setup" ]; then
+  rm -rf /var/lib/mysql/*
+
   echo "=============================="
   echo "=      Setting up MySQL      ="
   echo "=============================="
@@ -64,7 +66,7 @@ fi
 echo "=============================="
 echo "=       Starting MySQL       ="
 echo "=============================="
-mysqld_safe > /dev/null 2>&1 &
+exec mysqld_safe > /dev/null 2>&1 &
 tail -F /var/log/mysql/error.log &
 
 echo "=============================="
