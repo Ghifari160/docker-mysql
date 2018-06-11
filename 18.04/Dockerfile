@@ -1,4 +1,4 @@
-FROM ghifari160/ubuntu:16.04
+FROM ghifari160/ubuntu:18.04
 
 LABEL MAINTAINER "Ghifari160 <ghifari160@ghifari160.com>"
 

@@ -1,6 +1,6 @@
 FROM ghifari160/ubuntu:17.10
 
-MAINTAINER Ghifari160 <ghifari160@ghifari160.com>
+LABEL MAINTAINER "Ghifari160 <ghifari160@ghifari160.com>"
 
 # Disable interactive functions
 ENV DEBIAN_FRONTEND noninteractive

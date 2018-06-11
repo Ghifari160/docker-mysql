@@ -1,7 +1,9 @@
 # MySQL on Ubuntu for Docker #
+[![](https://img.shields.io/badge/docker%20hub-ghifari160%2Fmysql-f29111.svg)](https://img.shields.io/badge/docker%20hub-ghifari160%2Fmysql-f29111.svg)
+[![](https://images.microbadger.com/badges/image/ghifari160/mysql.svg)](https://microbadger.com/images/ghifari160/mysql "Get your own image badge on microbadger.com")
 
-A powerful database server running on the best OS and the best container system
-in the world.
+A powerful [database server][mysql] running on the best [OS][ubuntu] and the best
+[container system][docker] in the world.
 
 ## Why use this image
 This image is built on [ghifari160/ubuntu], which comes with more useful
@@ -70,7 +72,11 @@ docker run -d -e MYSQL_ROOT_PASSWORD=password -e G16_MACOS=yes ghifari160/mysql
 ## Tags
 | Tags                      | Ubuntu Version | Size  |
 |---------------------------|----------------|:-----:|
-| `latest` `16.04` `xenial` | 16.04          | _TBA_ |
-| `17.10`                   | 17.10          | _TBA_ |
+| `16.04` `xenial`          | 16.04          |[![](https://images.microbadger.com/badges/image/ghifari160/mysql:16.04.svg)](https://microbadger.com/images/ghifari160/mysql:16.04 "Get your own image badge on microbadger.com")|
+| `17.10` `artful`          | 17.10          |[![](https://images.microbadger.com/badges/image/ghifari160/mysql:17.10.svg)](https://microbadger.com/images/ghifari160/mysql:17.10 "Get your own image badge on microbadger.com")|
+| `latest` `18.04` `bionic` | 18.04          |[![](https://images.microbadger.com/badges/image/ghifari160/mysql.svg)](https://microbadger.com/images/ghifari160/mysql "Get your own image badge on microbadger.com")|
 
+[mysql]: https://www.mysql.com
+[ubuntu]: https://www.ubuntu.com
+[docker]: https://www.docker.com
 [ghifari160/ubuntu]: https://github.com/ghifari160/docker-ubuntu
