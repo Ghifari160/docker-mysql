@@ -75,6 +75,7 @@ docker run -d -e MYSQL_ROOT_PASSWORD=password -e G16_MACOS=yes ghifari160/mysql
 | `16.04` `xenial`          | 16.04          |[![](https://images.microbadger.com/badges/image/ghifari160/mysql:16.04.svg)](https://microbadger.com/images/ghifari160/mysql:16.04 "Get your own image badge on microbadger.com")|
 | `17.10` `artful`          | 17.10          | **NOT SUPPORTED** |
 | `latest` `18.04` `bionic` | 18.04          |[![](https://images.microbadger.com/badges/image/ghifari160/mysql.svg)](https://microbadger.com/images/ghifari160/mysql "Get your own image badge on microbadger.com")|
+| `devel` `18.10` `cosmic`  | 18.10          |[![](https://images.microbadger.com/badges/image/ghifari160/mysql:18.10.svg)](https://microbadger.com/images/ghifari160/mysql:18.10 "Get your own image badge on microbadger.com")|
 
 [mysql]: https://www.mysql.com
 [ubuntu]: https://www.ubuntu.com
